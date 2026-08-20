@@ -1,9 +1,10 @@
-# pyrefly: ignore [missing-import]
+import os
 from sqlalchemy import create_engine
-# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DATABASE_URL = "sqlite:///./friends.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, "friends.db")
+DATABASE_URL = f"sqlite:///{DB_PATH}"
 
 engine = create_engine(
     DATABASE_URL,

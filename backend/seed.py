@@ -1,6 +1,17 @@
-from database import SessionLocal
+import os
+import sys
+
+# Ensure backend directory is in sys.path
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
+
+from database import SessionLocal, engine, Base
+import models
 from models import User, Friend
 
+# Ensure tables are created in SQLite
+Base.metadata.create_all(bind=engine)
 
 db = SessionLocal()
 

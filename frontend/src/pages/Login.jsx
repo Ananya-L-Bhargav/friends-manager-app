@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Users, Lock, User, Eye, EyeOff, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Users, Lock, User, Eye, EyeOff, Sparkles, ArrowRight, ShieldCheck, Sun, Moon } from 'lucide-react';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -10,7 +10,7 @@ export default function Login() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { login, isAuthenticated } = useAuth();
+  const { login, isAuthenticated, theme, toggleTheme } = useAuth();
   const navigate = useNavigate();
 
   // If already authenticated, redirect to dashboard
@@ -54,6 +54,19 @@ export default function Login() {
 
   return (
     <div className="auth-container">
+      {/* Floating Theme Switcher */}
+      <div className="auth-theme-toggle">
+        <button
+          type="button"
+          className="btn-icon"
+          onClick={toggleTheme}
+          title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          aria-label="Toggle Theme"
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+      </div>
+
       <div className="glass-card auth-card">
         {/* Header with glowing icon */}
         <div className="auth-header">
